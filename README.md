@@ -1,52 +1,33 @@
-# Awesome-books
-> "Awesome books" is a simple website that displays a list of books and allows you to add and remove books from that list. For building this application, we used local storage to save the data of the books and we give it some interactivity using JavaScript. We also used a medium-fidelity wireframe to build the UI.
+# To Do List
+> "To Do List" is a simple yet powerful app that displays a list of tasks, and allows to add and remove them as well as mark them as done. For this application, we used local storage to save the data so that it is permanently stored in your browser.
 
 ## Built With
 
-- HTML and CSS
-- JavaScript
-- Using GITHub, Visual Studio Code
+- HTML, CSS and JavaScript
+- Using GITHub, Visual Studio Code, Webpack
 
 ## Getting Started
 
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-Git Bash or equivalent tool to clone the repository to your hard drive.
-Browser to see the results.
+To get a local copy up and running follow these steps:
 
 ### Setup
 
-Prepare a folder in your hard drive to copy the files to.
-
-### Install
-
-Open Git Bash and execute the following commands:
-- cd [your_local_folder]
-- git clone https://github.com/acolombo1/Awesome-books.git
-
-### Usage
-
-Open index.html file with your browser of choice.
-
+- Clone the repository to your hard drive.
+- Use your browser of choice to see the results (./dist/index.html).
+- Alternatively execute 'npm start'.
+- Use Visual Code to edit './src/index.html' and './src/index.js' files.
 ### Deployment
 
-Copy index.html, style.css and script.js to the http server.
-
-## Authors
+- Change your 'webpack.config.js' mode from development to production.
+- Execute 'npm run build'
+- Deploy '.dist/' contents to your http server.
+## Author
 
 👤 **Aldo Colombo**
 
 - GitHub: [@acolombo1](https://github.com/acolombo1)
 - Twitter: [@aldocolombo](https://twitter.com/aldocolombo)
 - LinkedIn: [Aldo Colombo](https://www.linkedin.com/in/aldo-colombo-2156009)
-
-👤 **Mariana Revilla Lérida**
-
-- GitHub: [@marurevi](https://github.com/marurevi)
-- Twitter: [@MaruRevilla](https://twitter.com/MaruRevilla)
-- LinkedIn: [Mariana-Revilla-Lérida](https://linkedin.com/in/mariana-revilla-lérida-a12aba143)
 
 ## Show your support
 
