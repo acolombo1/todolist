@@ -107,3 +107,7 @@ dist
 .eslintrc.json
 .hintrc
 .stylelintrc.json
+
+#others
+/node_modules
+.vscode
