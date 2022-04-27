@@ -1,6 +1,49 @@
-.hello {
-  color: red;
-}
 body {
-  background-color: rgb(116, 73, 20);
+  background-color: rgb(245, 245, 245);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8rem;
+}
+
+h1 {
+  color: rgb(245, 245, 245);
+}
+
+.listcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mainlist {
+  background-color: white;
+  width: 50%;
+  padding: 0;
+  list-style: none;
+  box-shadow: rgb(205, 205, 205) 2px 2px 5px;
+}
+
+li {
+  display: flex;
+  border-bottom: 2px solid rgb(245, 245, 245);
+  border-left: 2px solid rgb(245, 245, 245);
+  padding: 15px;
+  align-items: center;
+}
+
+li:nth-child(2) {
+  color: rgb(180, 180, 180);
+  font-style: italic;
+}
+
+li:nth-last-child(1) {
+  background-color: rgb(245, 245, 245);
+  justify-content: center;
+}
+
+.tachado {
+  text-decoration: line-through;
+}
+
+.description {
+  padding-left: 10px;
 }
