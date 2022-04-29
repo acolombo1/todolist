@@ -1,6 +1,5 @@
 import recyclebinimg from '../img/recyclebin.svg';
 import returnimg from '../img/return.svg';
-
 export default class Tasklist {
   constructor() {
     this.clickedonenter = false;
@@ -85,7 +84,7 @@ export default class Tasklist {
     if (event.key === 'Enter') {
       // Cancel the default action, if needed
       event.preventDefault();
-      this.#newitem();
+      if (event.target.value !== '') { this.#newitem(); }
     }
   };
 
@@ -178,23 +177,11 @@ export default class Tasklist {
   };
 
   #clearcompleted = () => {
-    let changed = false;
-    for (let i = 0; i < this.tasks.length; i += 1) {
-      const { completed } = this.tasks[i];
-      if (completed) {
-        this.tasks.splice(i, 1);
-        for (let j = i; j < this.tasks.length; j += 1) {
-          this.tasks[j].index -= 1;
-        }
-        i -= 1;
-        changed = true;
-      }
-    }
-    if (changed) {
-      this.savedata();
-      this.#clearlist();
-      this.renderdata();
-    }
+    const result = this.tasks.filter((task) => task.completed === false);
+    this.tasks = [...result];
+    this.savedata();
+    this.#clearlist();
+    this.renderdata();
   };
 
   #textchanged = (event) => {
