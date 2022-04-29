@@ -1,5 +1,6 @@
 import recyclebinimg from '../img/recyclebin.svg';
 import returnimg from '../img/return.svg';
+
 export default class Tasklist {
   constructor() {
     this.clickedonenter = false;
