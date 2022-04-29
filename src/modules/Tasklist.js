@@ -53,7 +53,7 @@ export default class Tasklist {
     const mainlist = document.querySelector('.mainlist');
 
     const i = this.tasks.length;
-    this.tasks[i] = { description: input.value, completed: false, index: i };
+    this.tasks[i] = { description: input.value, completed: false, index: i + 1 };
 
     this.savedata();
 
@@ -180,6 +180,9 @@ export default class Tasklist {
   #clearcompleted = () => {
     const result = this.tasks.filter((task) => task.completed === false);
     this.tasks = [...result];
+    for (let i = 0; i < this.tasks.length; i += 1) {
+      this.tasks[i].index = i + 1;
+    }
     this.savedata();
     this.#clearlist();
     this.renderdata();
