@@ -21,6 +21,9 @@ To get a local copy up and running follow these steps:
 - Change your 'webpack.config.js' mode from development to production.
 - Execute 'npm run build'
 - Deploy '.dist/' contents to your http server.
+### Live Demo
+
+[https://acolombo1.github.io/todolist/dist/](https://acolombo1.github.io/todolist/dist/)
 ## Author
 
 👤 **Aldo Colombo**
