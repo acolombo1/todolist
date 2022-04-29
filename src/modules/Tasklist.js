@@ -183,6 +183,9 @@ export default class Tasklist {
       const { completed } = this.tasks[i];
       if (completed) {
         this.tasks.splice(i, 1);
+        for (let j = i; j < this.tasks.length; j += 1) {
+          this.tasks[j].index -= 1;
+        }
         i -= 1;
         changed = true;
       }
@@ -195,10 +198,13 @@ export default class Tasklist {
   };
 
   #textchanged = (event) => {
-    const thisid = event.target.parentNode.id.substring(2);
+    const thisid = parseInt(event.target.parentNode.id.substring(2), 10);
     this.tasks[thisid].description = event.target.value;
     if (event.target.value === '') {
       this.tasks.splice(thisid, 1);
+      for (let i = thisid; i < this.tasks.length; i += 1) {
+        this.tasks[i].index -= 1;
+      }
     }
     this.savedata();
     this.#clearlist();
@@ -206,8 +212,11 @@ export default class Tasklist {
   };
 
   #deleteitem = (event) => {
-    const thisid = event.target.parentNode.id.substring(2);
+    const thisid = parseInt(event.target.parentNode.id.substring(2), 10);
     this.tasks.splice(thisid, 1);
+    for (let i = thisid; i < this.tasks.length; i += 1) {
+      this.tasks[i].index -= 1;
+    }
     this.savedata();
     this.#clearlist();
     this.renderdata();
