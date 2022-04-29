@@ -1,3 +1,6 @@
+import recyclebinimg from '../img/recyclebin.svg';
+import returnimg from '../img/return.svg';
+
 export default class Tasklist {
   constructor() {
     this.clickedonenter = false;
@@ -100,7 +103,7 @@ export default class Tasklist {
       if (enterimg === null) {
         enterimg = document.createElement('img');
         enterimg.classList.add('enterimg');
-        enterimg.src = './img/return.svg';
+        enterimg.src = { returnimg };
         enterimg.height = '15';
         enterimg.width = '15';
         addli.appendChild(enterimg);
@@ -223,7 +226,7 @@ export default class Tasklist {
     if (parentli.querySelector('.recyclebin') === null) {
       const recyclebin = document.createElement('img');
       recyclebin.classList.add('recyclebin');
-      recyclebin.src = './img/recyclebin.svg';
+      recyclebin.src = { recyclebinimg };
       recyclebin.height = '15';
       recyclebin.width = '15';
       parentli.appendChild(recyclebin);

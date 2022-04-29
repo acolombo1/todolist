@@ -1,11 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
   mode: 'development',
-  entry: {
-    index: './src/index.js',
-  },
-  devtool: 'inline-source-map',
+  entry: './src/index.js',
   devServer: {
     static: './dist',
   },
@@ -15,15 +13,10 @@ module.exports = {
     }),
   ],
   output: {
-    filename: '[name].bundle.js',
+    filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
-  },
-  performance: {
-    hints: false,
-  },
-  optimization: {
-    runtimeChunk: 'single',
+    publicPath: 'http://localhost:8080/',
   },
   module: {
     rules: [
@@ -32,7 +25,13 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        use: ['file-loader'],
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/i,
+        use: ['file-loader'],
         type: 'asset/resource',
       },
     ],
