@@ -16,15 +16,13 @@ module.exports = {
     }),
   ],
   output: {
-    filename: '[name].bundle.js',
+    publicPath: '',
+    filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
   performance: {
     hints: false,
-  },
-  optimization: {
-    runtimeChunk: 'single',
   },
   module: {
     rules: [
@@ -33,7 +31,11 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(svg|png|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(eot|ttf|woff|woff2)$/i,
         type: 'asset/resource',
       },
     ],

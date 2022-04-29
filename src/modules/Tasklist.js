@@ -103,7 +103,7 @@ export default class Tasklist {
       if (enterimg === null) {
         enterimg = document.createElement('img');
         enterimg.classList.add('enterimg');
-        enterimg.src = { returnimg };
+        enterimg.src = returnimg;
         enterimg.height = '15';
         enterimg.width = '15';
         addli.appendChild(enterimg);
@@ -226,7 +226,7 @@ export default class Tasklist {
     if (parentli.querySelector('.recyclebin') === null) {
       const recyclebin = document.createElement('img');
       recyclebin.classList.add('recyclebin');
-      recyclebin.src = { recyclebinimg };
+      recyclebin.src = recyclebinimg;
       recyclebin.height = '15';
       recyclebin.width = '15';
       parentli.appendChild(recyclebin);
