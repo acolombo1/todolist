@@ -53,7 +53,7 @@ export default class Tasklist {
     const mainlist = document.querySelector('.mainlist');
 
     const i = this.tasks.length;
-    this.tasks[i] = { description: input.value, completed: false, index: i };
+    this.tasks[i] = { description: input.value, completed: false, index: i + 1 };
 
     this.savedata();
 
@@ -85,7 +85,7 @@ export default class Tasklist {
     if (event.key === 'Enter') {
       // Cancel the default action, if needed
       event.preventDefault();
-      this.#newitem();
+      if (event.target.value !== '') { this.#newitem(); }
     }
   };
 
@@ -178,27 +178,24 @@ export default class Tasklist {
   };
 
   #clearcompleted = () => {
-    let changed = false;
+    const result = this.tasks.filter((task) => task.completed === false);
+    this.tasks = [...result];
     for (let i = 0; i < this.tasks.length; i += 1) {
-      const { completed } = this.tasks[i];
-      if (completed) {
-        this.tasks.splice(i, 1);
-        i -= 1;
-        changed = true;
-      }
+      this.tasks[i].index = i + 1;
     }
-    if (changed) {
-      this.savedata();
-      this.#clearlist();
-      this.renderdata();
-    }
+    this.savedata();
+    this.#clearlist();
+    this.renderdata();
   };
 
   #textchanged = (event) => {
-    const thisid = event.target.parentNode.id.substring(2);
+    const thisid = parseInt(event.target.parentNode.id.substring(2), 10);
     this.tasks[thisid].description = event.target.value;
     if (event.target.value === '') {
       this.tasks.splice(thisid, 1);
+      for (let i = thisid; i < this.tasks.length; i += 1) {
+        this.tasks[i].index -= 1;
+      }
     }
     this.savedata();
     this.#clearlist();
@@ -206,8 +203,11 @@ export default class Tasklist {
   };
 
   #deleteitem = (event) => {
-    const thisid = event.target.parentNode.id.substring(2);
+    const thisid = parseInt(event.target.parentNode.id.substring(2), 10);
     this.tasks.splice(thisid, 1);
+    for (let i = thisid; i < this.tasks.length; i += 1) {
+      this.tasks[i].index -= 1;
+    }
     this.savedata();
     this.#clearlist();
     this.renderdata();
