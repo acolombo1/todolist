@@ -16,6 +16,7 @@ To get a local copy up and running follow these steps:
 - Use your browser of choice to see the results (./dist/index.html).
 - Alternatively execute 'npm start'.
 - Use Visual Code to edit './src/index.html' and './src/index.js' files.
+- Run 'npm run build' to build the dist folder from the changed src files.
 ### Deployment
 
 - Change your 'webpack.config.js' mode from development to production.
