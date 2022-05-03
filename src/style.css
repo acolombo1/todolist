@@ -73,6 +73,8 @@ li:nth-last-child(1) {
 
 .enterimg {
   cursor: pointer;
+  height: 15px;
+  width: 15px;
 }
 
 .divfinal:hover {
