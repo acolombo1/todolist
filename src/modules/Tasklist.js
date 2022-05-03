@@ -19,13 +19,13 @@ export default class Tasklist {
 
   #checkchange = (event) => {
     const mytext = event.target.nextSibling;
-    const thisid = event.target.parentNode.id.substring(2);
+    const thisindex = event.target.parentNode.id.substring(2);
     if (event.target.checked) {
       if (!mytext.classList.contains('tachado')) mytext.classList.add('tachado');
-      this.tasks[thisid].completed = true;
+      this.tasks[thisindex].completed = true;
     } else {
       if (mytext.classList.contains('tachado')) mytext.classList.remove('tachado');
-      this.tasks[thisid].completed = false;
+      this.tasks[thisindex].completed = false;
     }
     this.saveTasksToLocalStorage();
   };
@@ -79,7 +79,7 @@ export default class Tasklist {
     textarea.addEventListener('focus', this.#textfocused);
   }
 
-  #newitem = () => {
+  #CreateNewItem = () => {
     const input = document.querySelector('.inplaceedit');
 
     const i = this.tasks.length;
@@ -99,7 +99,7 @@ export default class Tasklist {
     if (event.key === 'Enter') {
       // Cancel the default action, if needed
       event.preventDefault();
-      if (event.target.value !== '') { this.#newitem(); }
+      if (event.target.value !== '') { this.#CreateNewItem(); }
     }
   };
 
@@ -118,26 +118,24 @@ export default class Tasklist {
         enterimg = document.createElement('img');
         enterimg.classList.add('enterimg');
         enterimg.src = returnimg;
-        enterimg.height = '15';
-        enterimg.width = '15';
         addli.appendChild(enterimg);
         enterimg.addEventListener('click', () => {
           this.clickedonenter = true;
-          this.#newitem();
+          this.#CreateNewItem();
         });
       }
     }
   };
 
-  addliclick = () => {
+  addItemliClick = () => {
     if (this.clickedonenter) {
       this.clickedonenter = false;
     } else {
-      const addli = document.querySelector('.addli');
-      if (addli.querySelector('input') === null) {
+      const addItemli = document.querySelector('.addli');
+      if (addItemli.querySelector('input') === null) {
         const input = document.createElement('input');
         input.classList.add('inplaceedit');
-        addli.appendChild(input);
+        addItemli.appendChild(input);
         input.focus();
         input.addEventListener('input', this.#inputchange);
         input.addEventListener('keypress', this.#inputkey);
@@ -182,11 +180,11 @@ export default class Tasklist {
   };
 
   #textchanged = (event) => {
-    const thisid = parseInt(event.target.parentNode.id.substring(2), 10);
-    this.tasks[thisid].description = event.target.value;
+    const thisindex = parseInt(event.target.parentNode.id.substring(2), 10);
+    this.tasks[thisindex].description = event.target.value;
     if (event.target.value === '') {
-      this.tasks.splice(thisid, 1);
-      for (let i = thisid; i < this.tasks.length; i += 1) {
+      this.tasks.splice(thisindex, 1);
+      for (let i = thisindex; i < this.tasks.length; i += 1) {
         this.tasks[i].index -= 1;
       }
     }
@@ -196,9 +194,9 @@ export default class Tasklist {
   };
 
   #deleteitem = (event) => {
-    const thisid = parseInt(event.target.parentNode.id.substring(2), 10);
-    this.tasks.splice(thisid, 1);
-    for (let i = thisid; i < this.tasks.length; i += 1) {
+    const thisindex = parseInt(event.target.parentNode.id.substring(2), 10);
+    this.tasks.splice(thisindex, 1);
+    for (let i = thisindex; i < this.tasks.length; i += 1) {
       this.tasks[i].index -= 1;
     }
     this.saveTasksToLocalStorage();
