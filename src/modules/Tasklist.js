@@ -7,13 +7,13 @@ export default class Tasklist {
     this.tasks = [];
   }
 
-  retrievedata = () => {
+  retrieveTasksFromLocalStorage = () => {
     if (localStorage.getItem('todolist') != null) {
       this.tasks = JSON.parse(localStorage.getItem('todolist'));
     }
   };
 
-  savedata = () => {
+  saveTasksToLocalStorage = () => {
     localStorage.setItem('todolist', JSON.stringify(this.tasks));
   };
 
@@ -27,7 +27,7 @@ export default class Tasklist {
       if (mytext.classList.contains('tachado')) mytext.classList.remove('tachado');
       this.tasks[thisid].completed = false;
     }
-    this.savedata();
+    this.saveTasksToLocalStorage();
   };
 
   #textinput = (event) => {
@@ -40,7 +40,7 @@ export default class Tasklist {
     textarea.style.height = `${textarea.scrollHeight}px`;
   };
 
-  #checkenter = (event) => {
+  #textcheckenter = (event) => {
     if (event.key === 'Enter') {
       // Cancel the default action
       event.preventDefault();
@@ -48,33 +48,47 @@ export default class Tasklist {
     }
   };
 
+  #createli = (description, checked, i, before = null) => {
+    const mainlist = document.querySelector('.mainlist');
+    const checkbox = document.createElement('input');
+    checkbox.setAttribute('type', 'checkbox');
+    if (checked) {
+      checkbox.checked = true;
+    } else {
+      checkbox.checked = false;
+    }
+    const li = document.createElement('li');
+    li.id = `li${i}`;
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = description;
+    textarea.classList.add('description');
+    textarea.rows = 1;
+    if (checked) { textarea.classList.add('tachado'); }
+    li.appendChild(checkbox);
+    li.appendChild(textarea);
+    if (before !== null) {
+      mainlist.insertBefore(li, before.parentNode);
+    } else {
+      mainlist.appendChild(li);
+    }
+    checkbox.addEventListener('change', this.#checkchange);
+    this.#textinput2(textarea);
+    textarea.addEventListener('input', this.#textinput, false);
+    textarea.addEventListener('keypress', this.#textcheckenter);
+    textarea.addEventListener('change', this.#textchanged);
+    textarea.addEventListener('focus', this.#textfocused);
+  }
+
   #newitem = () => {
     const input = document.querySelector('.inplaceedit');
-    const mainlist = document.querySelector('.mainlist');
 
     const i = this.tasks.length;
     this.tasks[i] = { description: input.value, completed: false, index: i + 1 };
 
-    this.savedata();
+    this.saveTasksToLocalStorage();
 
-    const checkbox = document.createElement('input');
-    checkbox.setAttribute('type', 'checkbox');
-    const li = document.createElement('li');
-    li.id = `li${i}`;
-    const textarea = document.createElement('textarea');
-    textarea.innerHTML = input.value;
-    textarea.classList.add('description');
-    textarea.rows = 1;
-    li.appendChild(checkbox);
-    li.appendChild(textarea);
     const divfinal = document.querySelector('.divfinal');
-    mainlist.insertBefore(li, divfinal.parentNode);
-    checkbox.addEventListener('change', this.#checkchange);
-    this.#textinput2(textarea);
-    textarea.addEventListener('input', this.#textinput, false);
-    textarea.addEventListener('keypress', this.#checkenter);
-    textarea.addEventListener('change', this.#textchanged);
-    textarea.addEventListener('focus', this.#focused);
+    this.#createli(input.value, false, i, divfinal);
 
     input.remove();
     document.querySelector('.enterimg').remove();
@@ -140,33 +154,12 @@ export default class Tasklist {
     mainlist.lastChild.remove();
   };
 
-  renderdata = () => {
+  renderTasks = () => {
     const mainlist = document.querySelector('.mainlist');
     for (let i = 0; i < this.tasks.length; i += 1) {
       const { description, completed } = this.tasks[i];
-      const checkbox = document.createElement('input');
-      checkbox.setAttribute('type', 'checkbox');
-      if (completed) {
-        checkbox.checked = true;
-      } else {
-        checkbox.checked = false;
-      }
-      const li = document.createElement('li');
-      li.id = `li${i}`;
-      const textarea = document.createElement('textarea');
-      textarea.innerHTML = description;
-      textarea.classList.add('description');
-      textarea.rows = 1;
-      if (completed) { textarea.classList.add('tachado'); }
-      li.appendChild(checkbox);
-      li.appendChild(textarea);
-      mainlist.appendChild(li);
-      checkbox.addEventListener('change', this.#checkchange);
-      this.#textinput2(textarea);
-      textarea.addEventListener('input', this.#textinput, false);
-      textarea.addEventListener('keypress', this.#checkenter);
-      textarea.addEventListener('change', this.#textchanged);
-      textarea.addEventListener('focus', this.#focused);
+
+      this.#createli(description, completed, i);
     }
     const divfinal = document.createElement('div');
     divfinal.innerHTML = 'Clear All Completed';
@@ -183,9 +176,9 @@ export default class Tasklist {
     for (let i = 0; i < this.tasks.length; i += 1) {
       this.tasks[i].index = i + 1;
     }
-    this.savedata();
+    this.saveTasksToLocalStorage();
     this.#clearlist();
-    this.renderdata();
+    this.renderTasks();
   };
 
   #textchanged = (event) => {
@@ -197,9 +190,9 @@ export default class Tasklist {
         this.tasks[i].index -= 1;
       }
     }
-    this.savedata();
+    this.saveTasksToLocalStorage();
     this.#clearlist();
-    this.renderdata();
+    this.renderTasks();
   };
 
   #deleteitem = (event) => {
@@ -208,12 +201,12 @@ export default class Tasklist {
     for (let i = thisid; i < this.tasks.length; i += 1) {
       this.tasks[i].index -= 1;
     }
-    this.savedata();
+    this.saveTasksToLocalStorage();
     this.#clearlist();
-    this.renderdata();
+    this.renderTasks();
   };
 
-  #blurred = (event) => {
+  #textblurred = (event) => {
     const parentli = event.target.parentNode;
     const recyclebin = parentli.querySelector('.recyclebin');
     if (recyclebin !== null) recyclebin.remove();
@@ -221,7 +214,7 @@ export default class Tasklist {
     if (event.target.classList.contains('colorbg')) event.target.classList.remove('colorbg');
   };
 
-  #focused = (event) => {
+  #textfocused = (event) => {
     const parentli = event.target.parentNode;
     if (parentli.querySelector('.recyclebin') === null) {
       const recyclebin = document.createElement('img');
@@ -231,7 +224,7 @@ export default class Tasklist {
       recyclebin.width = '15';
       parentli.appendChild(recyclebin);
       recyclebin.addEventListener('mousedown', this.#deleteitem);
-      parentli.querySelector('textarea').addEventListener('blur', this.#blurred);
+      parentli.querySelector('textarea').addEventListener('blur', this.#textblurred);
     }
     if (!parentli.classList.contains('colorbg')) parentli.classList.add('colorbg');
     if (!event.target.classList.contains('colorbg')) event.target.classList.add('colorbg');
