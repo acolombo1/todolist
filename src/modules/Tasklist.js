@@ -35,7 +35,7 @@ export default class Tasklist {
     event.target.style.height = `${event.target.scrollHeight}px`;
   };
 
-  #textinput2 = (textarea) => {
+  #textcreated = (textarea) => {
     textarea.style.height = '15px';
     textarea.style.height = `${textarea.scrollHeight}px`;
   };
@@ -72,7 +72,7 @@ export default class Tasklist {
       mainlist.appendChild(li);
     }
     checkbox.addEventListener('change', this.#checkchange);
-    this.#textinput2(textarea);
+    this.#textcreated(textarea);
     textarea.addEventListener('input', this.#textinput, false);
     textarea.addEventListener('keypress', this.#textcheckenter);
     textarea.addEventListener('change', this.#textchanged);
