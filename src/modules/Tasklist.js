@@ -1,7 +1,7 @@
-import recyclebinimg from '../img/recyclebin.svg';
-import returnimg from '../img/return.svg';
+// import recyclebinimg from '../img/recyclebin.svg';
+// import returnimg from '../img/return.svg';
 
-export default class Tasklist {
+class Tasklist {
   constructor() {
     this.clickedonenter = false;
     this.tasks = [];
@@ -48,7 +48,7 @@ export default class Tasklist {
     }
   };
 
-  #createli = (description, checked, i, before = null) => {
+  createli = (description, checked, i, before = null) => {
     const mainlist = document.querySelector('.mainlist');
     const checkbox = document.createElement('input');
     checkbox.setAttribute('type', 'checkbox');
@@ -88,7 +88,7 @@ export default class Tasklist {
     this.saveTasksToLocalStorage();
 
     const divfinal = document.querySelector('.divfinal');
-    this.#createli(input.value, false, i, divfinal);
+    this.createli(input.value, false, i, divfinal);
 
     input.remove();
     document.querySelector('.enterimg').remove();
@@ -157,7 +157,7 @@ export default class Tasklist {
     for (let i = 0; i < this.tasks.length; i += 1) {
       const { description, completed } = this.tasks[i];
 
-      this.#createli(description, completed, i);
+      this.createli(description, completed, i);
     }
     const divfinal = document.createElement('div');
     divfinal.innerHTML = 'Clear All Completed';
@@ -226,3 +226,4 @@ export default class Tasklist {
     if (!event.target.classList.contains('colorbg')) event.target.classList.add('colorbg');
   };
 }
+module.exports = Tasklist;
