@@ -117,6 +117,7 @@ class Tasklist {
       if (enterimg === null) {
         enterimg = document.createElement('img');
         enterimg.classList.add('enterimg');
+        // eslint-disable-next-line no-undef
         enterimg.src = returnimg;
         addli.appendChild(enterimg);
         enterimg.addEventListener('click', () => {
@@ -217,6 +218,7 @@ class Tasklist {
     if (parentli.querySelector('.recyclebin') === null) {
       const recyclebin = document.createElement('img');
       recyclebin.classList.add('recyclebin');
+      // eslint-disable-next-line no-undef
       recyclebin.src = recyclebinimg;
       parentli.appendChild(recyclebin);
       recyclebin.addEventListener('mousedown', this.deleteitem);
