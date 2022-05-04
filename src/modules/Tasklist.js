@@ -143,7 +143,7 @@ class Tasklist {
     }
   };
 
-  #clearlist = () => {
+  clearlist = () => {
     const mainlist = document.querySelector('.mainlist');
     const toremove = mainlist.children.length - 3;
     for (let i = 0; i < toremove; i += 1) {
@@ -175,7 +175,7 @@ class Tasklist {
       this.tasks[i].index = i + 1;
     }
     this.saveTasksToLocalStorage();
-    this.#clearlist();
+    this.clearlist();
     this.renderTasks();
   };
 
@@ -189,18 +189,18 @@ class Tasklist {
       }
     }
     this.saveTasksToLocalStorage();
-    this.#clearlist();
+    this.clearlist();
     this.renderTasks();
   };
 
-  #deleteitem = (event) => {
+  deleteitem = (event) => {
     const thisindex = parseInt(event.target.parentNode.id.substring(2), 10);
     this.tasks.splice(thisindex, 1);
     for (let i = thisindex; i < this.tasks.length; i += 1) {
       this.tasks[i].index -= 1;
     }
     this.saveTasksToLocalStorage();
-    this.#clearlist();
+    this.clearlist();
     this.renderTasks();
   };
 
@@ -219,7 +219,7 @@ class Tasklist {
       recyclebin.classList.add('recyclebin');
       recyclebin.src = recyclebinimg;
       parentli.appendChild(recyclebin);
-      recyclebin.addEventListener('mousedown', this.#deleteitem);
+      recyclebin.addEventListener('mousedown', this.deleteitem);
       parentli.querySelector('textarea').addEventListener('blur', this.#textblurred);
     }
     if (!parentli.classList.contains('colorbg')) parentli.classList.add('colorbg');
