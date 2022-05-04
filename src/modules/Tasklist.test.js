@@ -13,9 +13,5 @@ test('Add one new item to the list', () => {
   const divfinal = document.querySelector('.divfinal');
   tasklist1.createli('description', false, 1, divfinal);
   const list = document.querySelector('.mainlist');
-  expect(list).toHaveLength(4);
+  expect(list.children).toHaveLength(4);
 });
-
-
-
-
