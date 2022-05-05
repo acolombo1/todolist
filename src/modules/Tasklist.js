@@ -1,5 +1,8 @@
-import recyclebinimg from '../img/recyclebin.svg';
-import returnimg from '../img/return.svg';
+/* eslint-disable class-methods-use-this */
+// import recyclebinimg from '../img/recyclebin.svg';
+// import returnimg from '../img/Rectangle55.png';
+const returnimg = new Image();
+const recyclebinimg = new Image();
 
 export default class Tasklist {
   constructor() {
@@ -48,7 +51,7 @@ export default class Tasklist {
     }
   };
 
-  #createli = (description, checked, i, before = null) => {
+  createli = (description, checked, i, before = null) => {
     const mainlist = document.querySelector('.mainlist');
     const checkbox = document.createElement('input');
     checkbox.setAttribute('type', 'checkbox');
@@ -77,7 +80,7 @@ export default class Tasklist {
     textarea.addEventListener('keypress', this.#textcheckenter);
     textarea.addEventListener('change', this.#textchanged);
     textarea.addEventListener('focus', this.#textfocused);
-  }
+  };
 
   #CreateNewItem = () => {
     const input = document.querySelector('.inplaceedit');
@@ -88,7 +91,7 @@ export default class Tasklist {
     this.saveTasksToLocalStorage();
 
     const divfinal = document.querySelector('.divfinal');
-    this.#createli(input.value, false, i, divfinal);
+    this.createli(input.value, false, i, divfinal);
 
     input.remove();
     document.querySelector('.enterimg').remove();
@@ -143,7 +146,7 @@ export default class Tasklist {
     }
   };
 
-  #clearlist = () => {
+  clearlist = () => {
     const mainlist = document.querySelector('.mainlist');
     const toremove = mainlist.children.length - 3;
     for (let i = 0; i < toremove; i += 1) {
@@ -157,7 +160,7 @@ export default class Tasklist {
     for (let i = 0; i < this.tasks.length; i += 1) {
       const { description, completed } = this.tasks[i];
 
-      this.#createli(description, completed, i);
+      this.createli(description, completed, i);
     }
     const divfinal = document.createElement('div');
     divfinal.innerHTML = 'Clear All Completed';
@@ -175,7 +178,7 @@ export default class Tasklist {
       this.tasks[i].index = i + 1;
     }
     this.saveTasksToLocalStorage();
-    this.#clearlist();
+    this.clearlist();
     this.renderTasks();
   };
 
@@ -189,18 +192,18 @@ export default class Tasklist {
       }
     }
     this.saveTasksToLocalStorage();
-    this.#clearlist();
+    this.clearlist();
     this.renderTasks();
   };
 
-  #deleteitem = (event) => {
+  deleteitem = (event) => {
     const thisindex = parseInt(event.target.parentNode.id.substring(2), 10);
     this.tasks.splice(thisindex, 1);
     for (let i = thisindex; i < this.tasks.length; i += 1) {
       this.tasks[i].index -= 1;
     }
     this.saveTasksToLocalStorage();
-    this.#clearlist();
+    this.clearlist();
     this.renderTasks();
   };
 
@@ -219,7 +222,7 @@ export default class Tasklist {
       recyclebin.classList.add('recyclebin');
       recyclebin.src = recyclebinimg;
       parentli.appendChild(recyclebin);
-      recyclebin.addEventListener('mousedown', this.#deleteitem);
+      recyclebin.addEventListener('mousedown', this.deleteitem);
       parentli.querySelector('textarea').addEventListener('blur', this.#textblurred);
     }
     if (!parentli.classList.contains('colorbg')) parentli.classList.add('colorbg');
