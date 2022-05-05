@@ -168,21 +168,15 @@ export default class Tasklist {
     const li = document.createElement('li');
     li.appendChild(divfinal);
     mainlist.appendChild(li);
-    console.log('load event listener');
     divfinal.addEventListener('click', this.clearcompleted);
   };
 
   clearcompleted = () => {
-    console.log('clearcompleted fired');
-    for (let i = 0; i < this.tasks.length; i += 1) {
-      console.log(this.tasks[i].completed);
-    }
     const result = this.tasks.filter((task) => task.completed === false);
     this.tasks = [...result];
     for (let i = 0; i < this.tasks.length; i += 1) {
       this.tasks[i].index = i + 1;
     }
-    console.log(this.tasks.length);
     this.saveTasksToLocalStorage();
     this.clearlist();
     this.renderTasks();

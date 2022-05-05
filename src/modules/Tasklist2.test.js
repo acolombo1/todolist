@@ -44,7 +44,6 @@ describe('test change checked', () => {
     const divfinal = document.querySelector('.divfinal');
     tasklist2.createli('sth more', false, 2, divfinal);
     tasklist2.tasks = [{ description: 'sth', completed: true, index: 1 }, { description: 'any', completed: false, index: 2 }, { description: 'sth more', completed: false, index: 3 }];
-    const list = document.querySelector('.mainlist');
 
     expect(tasklist2.tasks[2].completed).toBeFalsy();
 
@@ -67,7 +66,6 @@ describe('test change checked', () => {
     const divfinal = document.querySelector('.divfinal');
     tasklist2.createli('sth more', true, 2, divfinal);
     tasklist2.tasks = [{ description: 'sth', completed: true, index: 1 }, { description: 'any', completed: false, index: 2 }, { description: 'sth more', completed: true, index: 3 }];
-    const list = document.querySelector('.mainlist');
 
     expect(tasklist2.tasks[2].completed).toBeTruthy();
 
@@ -97,8 +95,6 @@ describe('test clearcompleted', () => {
 
     expect(list.children).toHaveLength(6);
 
-    tasklist2.clearlist();
-    tasklist2.renderTasks();
     tasklist2.clearcompleted();
     expect(list.children).toHaveLength(5);
   });
@@ -120,13 +116,11 @@ describe('test clearcompleted', () => {
 
     expect(list.children).toHaveLength(6);
 
-    tasklist2.clearlist();
-    tasklist2.renderTasks();
     tasklist2.clearcompleted();
     expect(list.children).toHaveLength(4);
   });
 
-  test('test clearcompleted works without items in localstorage', () => {
+  test('test clearcompleted works without items', () => {
     document.body.innerHTML = '<div class="listcontainer">'
       + '<ul class="mainlist">'
       + '<li>Today\'s To Do</li>'
@@ -137,8 +131,6 @@ describe('test clearcompleted', () => {
     tasklist2.tasks = [];
     const list = document.querySelector('.mainlist');
     expect(list.children).toHaveLength(3);
-    tasklist2.clearlist();
-    tasklist2.renderTasks();
     tasklist2.clearcompleted();
     expect(list.children).toHaveLength(3);
   });
