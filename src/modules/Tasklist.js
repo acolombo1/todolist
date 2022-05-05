@@ -20,7 +20,7 @@ export default class Tasklist {
     localStorage.setItem('todolist', JSON.stringify(this.tasks));
   };
 
-  #checkchange = (event) => {
+  checkchange = (event) => {
     const mytext = event.target.nextSibling;
     const thisindex = event.target.parentNode.id.substring(2);
     if (event.target.checked) {
@@ -74,7 +74,7 @@ export default class Tasklist {
     } else {
       mainlist.appendChild(li);
     }
-    checkbox.addEventListener('change', this.#checkchange);
+    checkbox.addEventListener('change', this.checkchange);
     this.#textcreated(textarea);
     textarea.addEventListener('input', this.#textinput, false);
     textarea.addEventListener('keypress', this.#textcheckenter);
@@ -168,10 +168,10 @@ export default class Tasklist {
     const li = document.createElement('li');
     li.appendChild(divfinal);
     mainlist.appendChild(li);
-    divfinal.addEventListener('click', this.#clearcompleted);
+    divfinal.addEventListener('click', this.clearcompleted);
   };
 
-  #clearcompleted = () => {
+  clearcompleted = () => {
     const result = this.tasks.filter((task) => task.completed === false);
     this.tasks = [...result];
     for (let i = 0; i < this.tasks.length; i += 1) {
