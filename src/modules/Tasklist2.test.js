@@ -15,7 +15,7 @@ test('Updates input text', () => {
     + '</div>';
   const divfinal = document.querySelector('.divfinal');
   tasklist2.createli('sth more', false, 2, divfinal);
-  tasklist2.tasks = [{ description: 'sth', completed: false, index: 1 }, { description: 'any', completed: false, index: 2 },{ description: 'sth more', completed: false, index: 3 }];
+  tasklist2.tasks = [{ description: 'sth', completed: false, index: 1 }, { description: 'any', completed: false, index: 2 }, { description: 'sth more', completed: false, index: 3 }];
   const list = document.querySelector('.mainlist');
   expect(list.children).toHaveLength(6);
   const input = document.querySelectorAll('textarea')[2];
