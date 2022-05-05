@@ -49,6 +49,7 @@ export default class Tasklist {
       event.preventDefault();
       event.target.blur();
     }
+    console.log('after' + event.key + ': ' + event.target.value);
   };
 
   createli = (description, checked, i, before = null) => {
@@ -208,6 +209,7 @@ export default class Tasklist {
   };
 
   #textblurred = (event) => {
+    console.log('blurred');
     const parentli = event.target.parentNode;
     const recyclebin = parentli.querySelector('.recyclebin');
     if (recyclebin !== null) recyclebin.remove();
@@ -216,6 +218,7 @@ export default class Tasklist {
   };
 
   #textfocused = (event) => {
+    console.log('focused');
     const parentli = event.target.parentNode;
     if (parentli.querySelector('.recyclebin') === null) {
       const recyclebin = document.createElement('img');
