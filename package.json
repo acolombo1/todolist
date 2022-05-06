@@ -4,9 +4,16 @@
   "description": "",
   "private": true,
   "scripts": {
-    "test": "jest --env=jsdom",
+    "test": "jest",
     "build": "webpack",
     "start": "webpack serve --open"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^.+\\.svg$": "jest-svg-transformer"
+    },
+    "testEnvironment": "jsdom",
+    "verbose": true
   },
   "keywords": [],
   "author": "",
@@ -16,19 +23,14 @@
     "@babel/plugin-transform-modules-commonjs": "^7.17.9",
     "babel-eslint": "^10.1.0",
     "css-loader": "^6.7.1",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.26.0",
+    "eslint": "^8.14.0",
+    "eslint-plugin-react": "^7.29.4",
     "express": "^4.18.0",
-    "hint": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^28.0.3",
     "jest-environment-jsdom": "^28.0.2",
+    "jest-svg-transformer": "^1.0.0",
     "style-loader": "^3.3.1",
-    "stylelint": "^13.13.1",
-    "stylelint-config-standard": "^21.0.0",
-    "stylelint-csstree-validator": "^1.9.0",
-    "stylelint-scss": "^3.21.0",
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-middleware": "^5.3.1",

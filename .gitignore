@@ -107,3 +107,4 @@ typings/
 # Other
 /node_modules
 .vscode
+/coverage
