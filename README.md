@@ -33,6 +33,11 @@ To get a local copy up and running follow these steps:
 - Twitter: [@aldocolombo](https://twitter.com/aldocolombo)
 - LinkedIn: [Aldo Colombo](https://www.linkedin.com/in/aldo-colombo-2156009)
 
+## Contributor
+
+👤 **José Ramón Castaños**
+- GitHub: [@jr-cast](https://github.com/jr-cast)
+
 ## Show your support
 
 Give a ⭐️ if you like this project!
