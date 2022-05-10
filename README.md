@@ -5,6 +5,7 @@
 
 - HTML, CSS and JavaScript
 - Using GITHub, Visual Studio Code, Webpack
+- Partially tested with Jest
 
 ## Getting Started
 
